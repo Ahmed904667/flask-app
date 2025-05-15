@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head><title>Message Board</title></head>
+<body>
+  <h1>Upload a Picture with Message</h1>
+  <form method="POST" action="/upload" enctype="multipart/form-data">
+    <input type="file" name="image" required><br>
+    <textarea name="message" placeholder="Write a message" required></textarea><br>
+    <button type="submit">Upload</button>
+  </form>
+
+  <h2>Messages</h2>
+  {% for post in posts %}
+    <div>
+      <img src="https://{{ bucket }}.s3.amazonaws.com/{{ post.image }}" width="150"><br>
+      <p>{{ post.message }}</p>
+      <a href="/edit/{{ post.id }}">Edit</a> |
+      <a href="/delete/{{ post.id }}">Delete</a>
+    </div>
+  {% endfor %}
+</body>
+</html>
